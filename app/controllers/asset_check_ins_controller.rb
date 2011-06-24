@@ -72,8 +72,6 @@ class AssetCheckInsController < ApplicationController
     respond_to do |wants|
       if @asset_check_in.save && @equipment_asset.update_attributes({:oos => @asset_check_in.equipment_asset_oos})
         flash[:notice] = t(:asset_check_in_created)
-        cookies[:asset_check_in_person] = @asset_check_in.person
-        cookies[:asset_check_in_location] = @asset_check_in.location
         wants.html { render_with_iphone_check :template => 'create', :redirect => true }
         wants.xml  { render :xml => @asset_check_in, :status => :created, :location => @equipment_asset }
       else
@@ -94,10 +92,10 @@ class AssetCheckInsController < ApplicationController
 
     if @template.is_iphone_request?(request)
       render "#{args[:template]}_iphone", :layout => false
-    elsif !args[:template].nil?
-      render :action => args[:template]
     elsif args[:redirect]
       redirect_to(@equipment_asset)
+    elsif !args[:template].nil?
+      render :action => args[:template]
     # else nothing to do
     end
   end
