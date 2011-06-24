@@ -48,12 +48,4 @@ class EquipmentAsset < ActiveRecord::Base
     out? ? "in" : "out"
   end
   
-  def status
-    if out?
-      out = asset_check_ins.last
-      "#{out.person} - #{fuzzy_date(out.created_at)}"
-    else
-      "Available"
-    end
-  end
 end

@@ -105,4 +105,12 @@ module EquipmentAssetsHelper
   def new_asset_group?(asset, group)
     return assets_grouped_by != 'none' && group != asset_group(asset)
   end
+  
+  def status(asset)
+    if asset.out?
+      "#{out.person} - #{fuzzy_date(asset.current.created_at)}"
+    else
+      "Available"
+    end
+  end
 end
