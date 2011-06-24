@@ -77,13 +77,13 @@ module EquipmentAssetsHelper
       str += " to <strong>#{h check_in.person}</strong>"
     end
     if details.include?(:person)
-      str += " by <em>#{h check_in.person}</em>"
+      str += " by <em>#{h check_in.user}</em>"
     end
     str += "."
   end
   
   def fuzzy_date(date)
-    "<acronym title=\"#{h simple_date(date)}\">#{distance_of_time_in_words(Time.now, date)}</acronym> ago"
+    " <acronym title=\"#{h simple_date(date)}\">#{distance_of_time_in_words(Time.now, date)}</acronym> ago"
   end
   
   def assets_grouped_by
