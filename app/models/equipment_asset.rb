@@ -45,7 +45,7 @@ class EquipmentAsset < ActiveRecord::Base
   end
   
   def next_location
-    out? "in" : "out"
+    out? ? "in" : "out"
   end
   
   def status

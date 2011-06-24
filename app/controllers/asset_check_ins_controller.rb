@@ -27,8 +27,7 @@ class AssetCheckInsController < ApplicationController
     @asset_check_in = @equipment_asset.asset_check_ins.new(params[:asset_check_in])
     @asset_check_in.equipment_asset_oos = @equipment_asset.oos
     @asset_check_in.user = User.current.name
-    @asset_check_in.location ||= @equipment_asset.location if !@equipment_asset.asset_check_ins.empty?
-    @asset_check_in.location ||= cookies[:asset_check_in_location]
+    @asset_check_in.location = @equipment_asset.next_location
   
     respond_to do |wants|
       wants.html do
@@ -95,8 +94,8 @@ class AssetCheckInsController < ApplicationController
 
     if @template.is_iphone_request?(request)
       render "#{args[:template]}_iphone", :layout => false
-    elsif !args[:action].nil?
-      render :action => args[:action]
+    elsif !args[:template].nil?
+      render :action => args[:template]
     elsif args[:redirect]
       redirect_to(@equipment_asset)
     # else nothing to do
