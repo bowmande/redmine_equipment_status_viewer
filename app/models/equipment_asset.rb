@@ -32,7 +32,28 @@ class EquipmentAsset < ActiveRecord::Base
     if asset_check_ins && asset_check_ins.last
       asset_check_ins.last.location
     else
-      "Unknown"
+      "in"
+    end
+  end
+  
+  def current
+    asset_check_ins.last
+  end
+  
+  def out?
+    location == "out"
+  end
+  
+  def next_location
+    out? "in" : "out"
+  end
+  
+  def status
+    if out?
+      out = asset_check_ins.last
+      "#{out.person} - #{fuzzy_date(check_in.created_at)}"
+    else
+      "Available"
     end
   end
 end

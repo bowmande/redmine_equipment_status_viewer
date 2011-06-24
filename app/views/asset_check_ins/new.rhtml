@@ -3,7 +3,7 @@
   <%= stylesheet_link_tag 'autocomplete', :plugin => 'redmine_equipment_status_viewer' %>
   <%= javascript_include_tag 'autocomplete', :plugin => 'redmine_equipment_status_viewer' %>
 <% end %>
-<h2>Check in for <%= name_and_type @equipment_asset %></h2>
+<h2>Check <%= @equipment_asset.next_location %> for <%= name_and_type @equipment_asset %></h2>
 
 <% form_for([@equipment_asset, @asset_check_in]) do |f| %>
   <%= error_messages_for :equipment_asset, :asset_check_in %>
@@ -12,15 +12,22 @@
     <%= f.text_field :person %>
   </div>
   <div class="pluginESV_formfield">
-    <%= f.label :location %><br />
-    <%= f.text_field :location %>
+    <%= f.label :username %><br />
+    <%= f.text_field :username %>
+  </div>
+  <div class="pluginESV_formfield">
+    <%= f.label :phone %><br />
+    <%= f.text_field :phone %>
+  </div>
+  <div class="pluginESV_formfield">
+    <%= f.hidden_field :location %>
   </div>
   <div class="pluginESV_formfield">
     <%= f.label :equipment_asset_oos, 'Out of service' %><br />
     <%= f.check_box :equipment_asset_oos %>
   </div>
   <div class="pluginESV_formactions">
-    <%= f.submit 'Check In' %>
+    <%= f.submit "Check #{@equipment_asset.next_location}" %>
     <%= link_to "Cancel", equipment_asset_path(@equipment_asset) %>
   </div>
 <% end %>

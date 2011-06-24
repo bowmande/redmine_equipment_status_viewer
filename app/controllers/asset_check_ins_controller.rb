@@ -26,7 +26,7 @@ class AssetCheckInsController < ApplicationController
   def new
     @asset_check_in = @equipment_asset.asset_check_ins.new(params[:asset_check_in])
     @asset_check_in.equipment_asset_oos = @equipment_asset.oos
-    @asset_check_in.person ||= cookies[:asset_check_in_person]
+    @asset_check_in.user = User.current.name
     @asset_check_in.location ||= @equipment_asset.location if !@equipment_asset.asset_check_ins.empty?
     @asset_check_in.location ||= cookies[:asset_check_in_location]
   

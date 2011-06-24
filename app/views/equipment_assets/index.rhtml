@@ -24,7 +24,7 @@
             <% end %>
             <th>Serial #</th>
             <% if !attribute_is_grouped?(:location) %>
-              <th>Location</th>
+              <th>Status</th>
             <% end %>
             <th>&nbsp;</th>
           </tr>
@@ -64,7 +64,7 @@
               <td class="pluginESV_<%= oos_class %>">
                 <%= link_to "", edit_equipment_asset_path(e), :class => "icon icon-edit", :title => "Edit #{e.name}" %>
                 <%= link_to "", print_equipment_asset_path(e), :class => "icon icon-report", :title => "Print label for #{e.name}" %>
-                <%= link_to "", equipment_asset_check_in_path(e), :class => "icon icon-time-add", :title => "Check in #{e.name}" %>
+                <%= link_to "", equipment_asset_check_in_path(e), :class => "icon icon-time-add", :title => "Check #{e.next_location} #{e.name}" %>
                 <% if !e.comment.empty? %>
                   <span class="icon icon-comment" title="<%=h e.comment %>"> </span>
                 <% end %>
@@ -83,7 +83,7 @@
 </div>
 <div class="splitcontentright">
   <div class="news box">
-    <h3>Check ins</h3>
+    <h3>Recent Updates</h3>
     <ul>
     <% @asset_check_ins.each do |check_in| %>
       <li>

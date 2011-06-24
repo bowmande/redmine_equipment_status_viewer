@@ -62,24 +62,28 @@ module EquipmentAssetsHelper
       else
         str += h(check_in.equipment_asset.name)
       end
-      str += " was checked in"
+      str += " was checked #{check_in.location}"
     else
-      str += "Checked in"
+      str += "Checked #{check_in.location}"
     end
     if details.include?(:date)
       if opt[:fuzzy_date]
-        str += " <acronym title=\"#{h simple_date(check_in.created_at)}\">#{distance_of_time_in_words(Time.now, check_in.created_at)}</acronym> ago"
+        str += fuzzy_date(check_in.created_at)
       else
         str += " on #{h simple_date(check_in.created_at)}"
       end
     end
-    if details.include?(:location)
-      str += " at <strong>#{h check_in.location}</strong>"
+    if details.include?(:location)  && check_in.out?
+      str += " to <strong>#{h check_in.person}</strong>"
     end
     if details.include?(:person)
       str += " by <em>#{h check_in.person}</em>"
     end
     str += "."
+  end
+  
+  def fuzzy_date(date)
+    "<acronym title=\"#{h simple_date(date)}\">#{distance_of_time_in_words(Time.now, date)}</acronym> ago"
   end
   
   def assets_grouped_by
