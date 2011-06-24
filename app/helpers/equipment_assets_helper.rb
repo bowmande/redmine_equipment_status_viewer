@@ -108,7 +108,7 @@ module EquipmentAssetsHelper
   
   def status(asset)
     if asset.out?
-      "#{out.person} - #{fuzzy_date(asset.current.created_at)}"
+      "#{asset.current.person} - #{fuzzy_date(asset.current.created_at)}"
     else
       "Available"
     end
