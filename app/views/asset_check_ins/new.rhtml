@@ -7,6 +7,7 @@
 
 <% form_for([@equipment_asset, @asset_check_in]) do |f| %>
   <%= error_messages_for :equipment_asset, :asset_check_in %>
+	<% unless @equipment_asset.out? %>
   <div class="pluginESV_formfield">
     <%= f.label :person %><br />
     <%= f.text_field :person %>
@@ -19,13 +20,14 @@
     <%= f.label :phone %><br />
     <%= f.text_field :phone %>
   </div>
-  <div class="pluginESV_formfield">
-    <%= f.hidden_field :location %>
-		<%= f.hidden_field :user %>
-  </div>
+	<% end %>
   <div class="pluginESV_formfield">
     <%= f.label :equipment_asset_oos, 'Out of service' %><br />
     <%= f.check_box :equipment_asset_oos %>
+  </div>
+  <div class="pluginESV_formfield">
+    <%= f.hidden_field :location %>
+		<%= f.hidden_field :user %>
   </div>
   <div class="pluginESV_formactions">
     <%= f.submit "Check #{@equipment_asset.next_location}" %>

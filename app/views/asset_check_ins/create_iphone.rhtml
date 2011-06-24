@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
-<title>Check in complete</title>
+<title>Check <%= @equipment_asset.location %> complete</title>
 <!-- <meta content="yes" name="apple-mobile-web-app-capable" /> -->
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
 <meta content="minimum-scale=1.0, width=device-width, maximum-scale=0.6667, user-scalable=no" name="viewport" />
@@ -21,10 +21,10 @@
 </div>
 
 <div id="content">
-  <span class="graytitle">Checked in!</span>
+  <span class="graytitle">Checked <%= @equipment_asset.location %>!</span>
   <ul class="pageitem">
     <li class="textbox">
-      <span class="header">Successfully checked in <%= @equipment_asset.name %></span>
+      <span class="header">Successfully checked <%= @equipment_asset.location %> <%= @equipment_asset.name %></span>
       <p>You have checked in <%= @equipment_asset.name %> to <%=h @asset_check_in.location %>.</p>
     </li>
   </ul>
