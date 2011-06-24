@@ -24,7 +24,7 @@ class AssetCheckIn < ActiveRecord::Base
 
   belongs_to :equipment_asset
 
-  validates_presence_of :location, :equipment_asset_id, :redmine_user
+  validates_presence_of :location, :equipment_asset_id, :user
   
   def out?
     location == "out"
