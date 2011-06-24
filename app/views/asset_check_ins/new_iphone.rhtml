@@ -46,8 +46,8 @@
       </li>
     </ul>
   <% end %>
+	<% unless @equipment_asset.out? %>
   <ul class="pageitem">
-			<% unless @equipment_asset.out? %>
     <li class="bigfield">
 			<%= f.label :person %>
       <%= f.text_field :person, :placeholder => "Person" %>
@@ -60,12 +60,8 @@
 			<%= f.label :phone %>
       <%= f.text_field :phone, :placeholder => "Contact Number" %>
     </li>
-			<% end %>
-    <li class="checkbox">
-      <span class="name"><%= f.label :equipment_asset_oos, "Out of service?" %></span>
-      <%= f.check_box :equipment_asset_oos %>
-    </li>
   </ul>
+	<% end %>
   <ul class="pageitem">
     <li class="button">
       <%= f.submit "Check #{@equipment_asset.next_location}" %>
